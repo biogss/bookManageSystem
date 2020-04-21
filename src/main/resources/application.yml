@@ -1,24 +1,61 @@
-spring.datasource.druid.initial-size=5
-spring.datasource.druid.min-idle=5
-spring.datasource.druid.maxActive=20
-spring.datasource.druid.maxWait=60000
-spring.datasource.druid.timeBetweenEvictionRunsMillis=60000
-spring.datasource.druid.minEvictableIdleTimeMillis=300000
-spring.datasource.druid.validationQuery=SELECT 1
-spring.datasource.druid.testWhileIdle=true
-spring.datasource.druid.testOnBorrow=false
-spring.datasource.druid.testOnReturn=false
-spring.datasource.druid.poolPreparedStatements=true
-spring.datasource.druid.maxPoolPreparedStatementPerConnectionSize=20
-spring.datasource.druid.filters=stat,wall
-spring.datasource.druid.connectionProperties=druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
-spring.datasource.druid.web-stat-filter.enabled=true
-spring.datasource.druid.web-stat-filter.url-pattern=/*
-spring.datasource.druid.web-stat-filter.exclusions=*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
-spring.datasource.druid.stat-view-servlet.deny=192.168.1.73
-spring.datasource.druid.stat-view-servlet.reset-enable=false
-  #以下4项，将来上生产环境以后一定要改！！！！！一定要改！！！！！一定要改！！！！！
-spring.datasource.druid.stat-view-servlet.url-pattern=/druid/*
-spring.datasource.druid.stat-view-servlet.allow=127.0.0.1,*
-spring.datasource.druid.stat-view-servlet.login-username=admin
-spring.datasource.druid.stat-view-servlet.login-password=123456
+server:
+  port: 9090
+
+spring:
+  datasource:
+    druid:
+      name: bookManageSystem
+      url: jdbc:mysql://localhost:3306/bookmanagesystemdb?characterEncoding=UTF-8&serverTimezone=UTC
+      username: wanghao
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 初始化物理连接个数
+      initial-size: 10
+      # 最小连接池数量
+      min-idle: 10
+      # 最大连接池数量
+      max-active: 20
+      # 获取连接时最大等待时间(ms)
+      max-wait: 60000
+      # 检测连接的间隔时间，若连接空闲时间 >= minEvictableIdleTimeMillis，则关闭物理连接
+      time-between-eviction-runs-millis: 60000
+      # 连接保持空闲而不被驱逐的最小时间(ms)
+      min-evictable-idle-time-millis: 60000
+      # 开启缓存preparedStatement(PSCache)
+      pool-prepared-statements: false
+      # 启用PSCache后，指定每个连接上PSCache的大小
+      #max-pool-prepared-statement-per-connection-size: 20
+      # 用来检测连接是否有效的sql
+      validation-query: select 'x'
+      # 申请连接时不检测连接是否有效
+      test-on-borrow: false
+      # 归还连接时不检测连接是否有效
+      test-on-return: false
+      # 申请连接时检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效（不影响性能）
+      test-while-idle: true
+      # 配置监控统计拦截的filters（不配置则监控界面sql无法统计），监控统计filter:stat，日志filter:log4j，防御sql注入filter:wall
+      filters: stat,wall
+      # 支持合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql(Sql合并)功能；慢SQL记录(配置超过5秒就是慢，默认是3秒)
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      #WebStatFilter配置
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /*.js,/*.gif,/*.jpg,/*.bmp,/*.png,/*.css,/*.ico,/druid/*
+      #StatViewServlet配置
+      stat-view-servlet:
+        allow: 127.0.0.1
+        enabled: true  #是否启用StatViewServlet（监控页面）默认值为false（考虑到安全问题默认并未启动，如需启用建议设置密码或白名单以保障安全）
+        login-username: admin
+        login-password: 123456
+        url-pattern: /druid/*
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.model
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.example.dao: debug

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>测试网站</title>
+    <!--
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    -->
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+</head>
+<body>
+<div>
+    <label class="name">书籍名称：</label>
+    <input placeholder="输入名称" type="text" id="bookName"/>
+    <button id="queryBook">查询书籍</button>
+</div>
+<div>
+    <p>录入书籍</p>
+    <label class="name">书籍名称：</label>
+    <input placeholder="书籍名称" type="text" id="insertBookName"/><br/>
+    <label class="name">书籍代码：</label>
+    <input placeholder="书籍代码" type="text" id="insertBookCode"/><br/>
+    <label class="name">书籍价格：</label>
+    <input placeholder="书籍价格" type="text" id="insertBookPrice"/><br/>
+    <label class="name">书籍类型：</label>
+    <input placeholder="书籍类型" type="text" id="insertBookType"/><br/>
+    <label class="name">书籍作者：</label>
+    <input placeholder="书籍作者" type="text" id="insertBookAuthor"/><br/>
+    <label class="name">书籍出版社：</label>
+    <input placeholder="书籍出版社" type="text" id="insertBookPublish"/><br/>
+    <label class="name">书籍描述：</label>
+    <input placeholder="书籍描述" type="text" id="insertBookDesc"/><br/>
+    <label class="name">书籍封面：</label>
+    <input placeholder="书籍封面" type="text" id="insertBookCover"/><br/>
+    <label class="name">书籍状态：</label>
+    <input placeholder="书籍状态" type="text" id="insertBookStatus"/><br/>
+    <label class="name">书籍折旧率：</label>
+    <input placeholder="书籍折旧率" type="text" id="insertBookDepreciation"/><br/>
+    <label class="name">书籍出版时间：</label>
+    <input placeholder="书籍出版时间" type="text" id="insertBookDate"/><br/>
+    <button id="insertBook">录入书籍</button>
+</div>
+<div>
+    <p>结果是：</p>
+    <div id="result">
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BookDao">
+    <sql id="baseSql">
+        book_id,book_name,book_code,book_price,book_type,book_author,book_publishing_house,book_depreciation,
+        book_cover,book_status,book_desc,book_publish_date,create_date,update_date
+    </sql>
+    <select id="getBookListByBookName" resultType="Book">
+      select 
+        <include refid="baseSql"/>
+      from t_book
+      <where>
+          <if test="bookName !=null and bookName != ''">
+              book_name like concat('%' ,#{bookName}, '%')
+              <!--book_name like '%'${bookName}'%'-->
+          </if>
+      </where>
+    </select>
+
+    <insert id="insertBook">
+        insert into t_book
+          (book_name,book_code,book_price,book_type,book_author,book_publishing_house,book_depreciation,
+           book_cover,book_status,book_desc,book_publish_date,create_date,update_date)
+          values (#{book.bookName},#{book.bookCode},#{book.bookPrice}, #{book.bookType},#{book.bookAuthor},
+                         #{book.bookPublishingHouse},#{book.bookDepreciation},#{book.bookCover},#{book.bookStatus},
+                         #{book.bookDesc},#{book.bookPublishDate},sysdate(),sysdate())
+    </insert>
+</mapper>

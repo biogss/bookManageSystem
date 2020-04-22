@@ -49,4 +49,35 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("button#updateBook").click(function(){
+        var jsonObj = {
+            bookName: $("#updateBookName").val(),
+            bookCode: $("#updateBookCode").val(),
+            bookPrice: $("#updateBookPrice").val(),
+            bookType: $("#updateBookType").val(),
+            bookAuthor: $("#updateBookAuthor").val(),
+            bookPublishingHouse: $("#updateBookPublish").val(),
+            bookDesc: $("#updateBookDesc").val(),
+            bookCover: $("#updateBookCover").val(),
+            bookStatus: $("#updateBookStatus").val(),
+            bookDepreciation: $("#updateBookDepreciation").val(),
+            bookPublishDate: $("#updateBookDate").val()
+        };
+        $.ajax({
+            async : false,
+            url: "updateBook",
+            data:JSON.stringify(jsonObj), // 传入json数据
+            type: "post",
+            dataType:"json",//返回数据类型
+            headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
+            success:function(data){
+                alert(data);
+                $("div#result").val(data);
+            },
+            error:function(err){
+                alert('连接失败');
+            }
+        });
+    });
 });

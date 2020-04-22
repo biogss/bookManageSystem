@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.model.Book;
 import com.example.service.BookService;
+import com.example.util.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +24,33 @@ import java.util.List;
 @RestController
 public class BookController {
 
-    Class clazz;
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
     @Autowired
     private BookService bookService;
 
     @RequestMapping("/getBookByName")
-    public List<Book> getBook(@RequestBody String bookName){
-        logger.error("getBookByName入参为：" + bookName.toString());
-        JSONObject jsonObject = JSON.parseObject(bookName);
-        return bookService.getBookListByBookName(jsonObject.getString("bookName"));
+    public ResultVo getBook(@RequestBody JSONObject bookName){
+        ResultVo resultVo = new ResultVo();
+        logger.info("getBookByName入参为：" + bookName.toString());
+        List<Book> bookList =  bookService.getBookListByBookName(bookName.getString("bookName"));
+        resultVo.setResultData(bookList);
+        return resultVo;
     }
 
 
     @RequestMapping("/insertBook")
     public int insertBook(@RequestBody Book params) {
-        logger.error("insertBook：" + params.toString());
+        logger.info("insertBook：" + params.toString());
         return bookService.insertBook(params);
+    }
+
+    @RequestMapping("/updateBook")
+    public ResultVo updateBook(@RequestBody Book book) {
+        logger.info("updateBook" + book);
+        int row = bookService.updateBook(book);
+        ResultVo resultVo = new ResultVo();
+        resultVo.setResultData(row);
+        return resultVo;
     }
 
 }

@@ -31,4 +31,11 @@ public interface BookDao {
      * @return int
      */
     int insertBook(@Param("book") Book book);
+
+    /**
+     * 修改书籍信息
+     * @param book
+     * @return int
+     */
+    int updateBook(@Param("book") Book book);
 }

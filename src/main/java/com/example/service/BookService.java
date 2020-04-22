@@ -25,5 +25,12 @@ public interface BookService {
      * @return
      */
     int insertBook(Book book);
+
+    /**
+     * 修改书籍信息
+     * @param book
+     * @return int
+     */
+    int updateBook(Book book);
     
 }

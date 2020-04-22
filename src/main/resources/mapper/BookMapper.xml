@@ -25,4 +25,45 @@
                          #{book.bookPublishingHouse},#{book.bookDepreciation},#{book.bookCover},#{book.bookStatus},
                          #{book.bookDesc},#{book.bookPublishDate},sysdate(),sysdate())
     </insert>
+
+    <update id="updateBook">
+        update t_book
+        <set>
+            <if test="book.bookName != null and book.bookName != ''">
+                book_name = #{book.bookName},
+            </if>
+            <if test="book.bookCode != null and book.bookCode != ''">
+                book_code = #{book.bookCode},
+            </if>
+            <if test="book.bookPrice != null and book.bookPrice != ''">
+                book_price = #{book.bookPrice},
+            </if>
+            <if test="book.bookStatus != null and book.bookStatus != ''">
+                book_status = #{book.bookStatus},
+            </if>
+            <if test="book.bookType != null and book.bookType != ''">
+                book_tyPE = #{book.bookType},
+            </if>
+            <if test="book.bookAuthor != null and book.bookAuthor != ''">
+                book_author = #{book.bookAuthor},
+            </if>
+            <if test="book.bookPublishingHouse != null and book.bookPublishingHouse != ''">
+                book_publishing_house = #{book.bookPublishingHouse},
+            </if>
+            <if test="book.bookDepreciation != null and book.bookDepreciation != ''">
+                book_depreciation = #{book.bookDepreciation},
+            </if>
+            <if test="book.bookCover != null and book.bookCover != ''">
+                book_cover = #{book.bookCover},
+            </if>
+            <if test="book.bookDesc != null and book.bookDesc != ''">
+                book_desc = #{book.bookDesc},
+            </if>
+            <if test="book.bookPublishDate != null and book.bookPublishDate != ''">
+                book_publish_date = #{book.bookPublishDate},
+            </if>
+            update_date = sysdate()
+        </set>
+        where book_code = #{book.bookCode}
+    </update>
 </mapper>

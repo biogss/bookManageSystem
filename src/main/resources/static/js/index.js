@@ -41,7 +41,6 @@ $(document).ready(function(){
             dataType:"json",//返回数据类型
             headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
             success:function(data){
-                alert(data);
                 $("div#result").val(data);
             },
             error:function(err){
@@ -72,8 +71,74 @@ $(document).ready(function(){
             dataType:"json",//返回数据类型
             headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
             success:function(data){
-                alert(data);
                 $("div#result").val(data);
+            },
+            error:function(err){
+                alert('连接失败');
+            }
+        });
+    });
+
+    $("button#queryUser").click(function(){
+        var jsonObj = {
+            userName: $("#userName").val()
+        };
+        $.ajax({
+            async : false,
+            url: "getUserInfoByUserName",
+            data:JSON.stringify(jsonObj), // 传入json数据
+            type: "POST",
+            dataType:"json",//返回数据类型
+            headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
+            success:function(data){
+                $("div#result").html(data);
+            },
+            error:function(err){
+                alert('连接失败');
+            }
+        });
+    });
+
+    $("button#insertUser").click(function(){
+        var jsonObj = {
+            userName: $("#insertUserName").val(),
+            password: $("#insertPassword").val(),
+            userType: $("#insertUserType").val(),
+            bookType: $("#updateBookType").val(),
+            mobileNo: $("#insertMobileNo").val(),
+        };
+        $.ajax({
+            async : false,
+            url: "addUser",
+            data:JSON.stringify(jsonObj), // 传入json数据
+            type: "post",
+            dataType:"json",//返回数据类型
+            headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
+            success:function(data){
+                $("div#result").html(data);
+            },
+            error:function(err){
+                alert('连接失败');
+            }
+        });
+    });
+
+    $("button#borrowAdd").click(function(){
+        var jsonObj = {
+            userId: $("#userId").val(),
+            bookId: $("#bookId").val(),
+            borrowStartTime: $("#borrowStartTime").val(),
+            borrowEndTime: $("#borrowEndTime").val()
+        };
+        $.ajax({
+            async : false,
+            url: "borrowBook",
+            data:JSON.stringify(jsonObj), // 传入json数据
+            type: "post",
+            dataType:"json",//返回数据类型
+            headers:{"Content-Type":"application/json"},  //传入json数据时需设置请求头
+            success:function(data){
+                $("div#result").html(data);
             },
             error:function(err){
                 alert('连接失败');

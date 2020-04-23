@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BorrowDao">
+
+    <sql id="borrow_base">
+        user_id,book_id,borrow_start_time,borrow_end_time,create_date,update_date
+    </sql>
+    <select id="getBorrowInfoByUserIdAndBookId" resultType="BorrowInfo">
+        select <include refid="borrow_base"/>
+        from t_borrow_info
+        <where>
+            <if test="userId != null and userId != ''">
+               and user_id = #{userId}
+            </if>
+            <if test="bookId != null and bookId != ''">
+                and book_id = #{bookId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addBorrowInfo">
+        insert into t_borrow_info(<include refid="borrow_base"/>)
+        values (#{borrowInfo.userId}, #{borrowInfo.bookId}, #{borrowInfo.borrowStartTime},#{borrowInfo.borrowEndTime},
+        sysdate(), sysdate())
+    </insert>
+
+    <update id="updateBorrowInfo">
+        update t_borrow_info
+        <set>
+            <if test="borrowInfo.userId != null and borrowInfo.userId != ''">
+                user_id = #{borrowInfo.userId},
+            </if>
+            <if test="borrowInfo.bookId != null and borrowInfo.bookId != ''">
+                book_id = #{borrowInfo.bookId},
+            </if>
+            <if test="borrowInfo.borrowStartTime != null and borrowInfo.borrowStartTime != ''">
+                borrow_start_time = #{borrowInfo.borrowStartTime},
+            </if>
+            <if test="borrowInfo.borrowEndTime != null and borrowInfo.borrowEndTime != ''">
+                borrow_end_time = #{borrowInfo.borrowEndTime},
+            </if>
+            update_date = sysdate()
+        </set>
+        where user_id = #{borrowInfo.userId} and book_id = #{borrowInfo.bookId}
+    </update>
+</mapper>

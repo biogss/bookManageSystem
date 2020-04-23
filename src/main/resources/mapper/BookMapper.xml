@@ -64,6 +64,6 @@
             </if>
             update_date = sysdate()
         </set>
-        where book_code = #{book.bookCode}
+        where book_id = #{book.bookId}
     </update>
 </mapper>

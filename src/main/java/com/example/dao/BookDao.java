@@ -20,21 +20,21 @@ public interface BookDao {
 
     /**
      * 根据数据名称查询书籍信息
-     * @param bookName
+     * @param bookName 书籍名称
      * @return List
      */
     List<Book> getBookListByBookName(@Param("bookName") String bookName);
 
     /**
      * 插入书籍
-     * @param book
+     * @param book 书籍对象
      * @return int
      */
     int insertBook(@Param("book") Book book);
 
     /**
      * 修改书籍信息
-     * @param book
+     * @param book 书籍对象
      * @return int
      */
     int updateBook(@Param("book") Book book);

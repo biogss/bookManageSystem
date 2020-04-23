@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserDao">
+
+    <sql id="user_base">
+        user_id,user_name,password,mobile_no,user_type,create_date,update_date
+    </sql>
+
+    <select id="getUserInfoByUserName" resultType="User">
+        select
+        <include refid="user_base"/>
+        from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                user_name like concat('%', #{userName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertUser">
+        insert into t_user(user_name,password,mobile_no,user_type,create_date,update_date)
+        values (#{userInfo.userName}, #{userInfo.password}, #{userInfo.mobileNo}, #{userInfo.userType},
+        sysdate(), sysdate())
+    </insert>
+
+    <select id="getUserInfoByUserId" resultType="User">
+        select
+        <include refid="user_base"/>
+        from t_user
+        <where>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId}
+            </if>
+        </where>
+    </select>
+</mapper>

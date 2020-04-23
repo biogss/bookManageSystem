@@ -12,6 +12,7 @@ import com.example.util.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +35,7 @@ public class BorrowController {
 	private UserService userService;
 
 	@RequestMapping("/borrowBook")
+	@Transactional
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
 		logger.info(params.toJSONString());
 
@@ -48,8 +50,14 @@ public class BorrowController {
 
 			Book book = new Book();
 			book.setBookId(params.getInteger("bookId"));
-			book.setBookDepreciation(10);
+			book.setBookDepreciation(14);
 			bookService.updateBook(book);
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+//            int a = 2/0;
 		}
 		ResultVo resultVo = new ResultVo();
 		return resultVo;

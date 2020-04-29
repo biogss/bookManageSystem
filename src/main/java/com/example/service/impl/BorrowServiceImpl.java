@@ -34,21 +34,13 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public boolean borrowBook(JSONObject params) {
+    public boolean borrowBook(User user, Book bookInfo, BorrowInfo borrowInfo) {
         boolean result = false;
-        User userInfo = userDao.getUserInfoByUserId(params.getInteger("user_id"));
+        User userInfo = userDao.getUserInfoByUserId(user.getUserId());
         String userType = "1";
         if (userInfo != null && userType.equals(userInfo.getUserType()) ) {
-            BorrowInfo borrowInfo = new BorrowInfo();
-            borrowInfo.setUserId(params.getInteger("user_id"));
-            borrowInfo.setBookId(params.getInteger("book_id"));
-            borrowInfo.setBorrowStartTime(params.getDate("borrow_start_time"));
-            borrowInfo.setBorrowEndTime(params.getDate("borrow_end_time"));
             borrowDao.addBorrowInfo(borrowInfo);
-
-            Book bookInfo = new Book();
             bookInfo.setBookDepreciation(10);
-            bookInfo.setBookId(params.getInteger("book_id"));
             bookDao.updateBook(bookInfo);
             result = true;
         }

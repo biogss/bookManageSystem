@@ -14,5 +14,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BookManageSystem {
     public static void main(String[] args) {
         SpringApplication.run(BookManageSystem.class, args);
-    }
+}
 }

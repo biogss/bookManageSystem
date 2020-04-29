@@ -59,4 +59,4 @@ mybatis:
 logging:
   level:
     com.example.dao: debug
-    root: info
+    root: debug

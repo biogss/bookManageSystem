@@ -29,10 +29,18 @@ public class BorrowController {
 	private BorrowService borrowService;
 
 	@RequestMapping("/borrowBook")
-	@Transactional
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
-		logger.info(params.toJSONString());
-		boolean result = borrowService.borrowBook(params);
+		User user = new User();
+		user.setUserId(params.getInteger("userId"));
+		Book bookInfo = new Book();
+		bookInfo.setBookId(params.getInteger("bookId"));
+		BorrowInfo borrowInfo = new BorrowInfo();
+		borrowInfo.setBookId(params.getInteger("bookId"));
+		borrowInfo.setUserId(params.getInteger("userId"));
+		borrowInfo.setBorrowStartTime(params.getDate("borrowStartTime"));
+		borrowInfo.setBorrowEndTime(params.getDate("borrowEndTime"));
+		//调用service完成借书的逻辑
+		boolean result = borrowService.borrowBook(user, bookInfo, borrowInfo);
 		ResultVo resultVo = new ResultVo();
 		resultVo.setResultData(result);
 		return resultVo;

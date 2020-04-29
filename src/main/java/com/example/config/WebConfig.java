@@ -2,11 +2,7 @@ package com.example.config;
 
 import com.example.util.StringToBigDecimalConverter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.geo.format.DistanceFormatter;
-import org.springframework.data.geo.format.PointFormatter;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**

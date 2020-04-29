@@ -16,5 +16,5 @@ public interface BorrowService {
 	 * @param params 参数列表
 	 * @return 借阅的数据信息
 	 */
-	boolean borrowBook(JSONObject params);
+	boolean borrowBook(User user, Book book, BorrowInfo borrowInfo);
 }

@@ -41,14 +41,15 @@ public class controllerAOP {
         logger.info("controller方法："  + signature.getDeclaringTypeName() + "." +signature.getName() + "执行完成");
     }
     @Around("controllerLog()")
-    public void logAround(ProceedingJoinPoint point){
+    public Object logAround(ProceedingJoinPoint point){
         logger.info("******************before");
+        Object proceed = null;
         try {
-            point.proceed();
+            proceed = point.proceed();
         } catch (Throwable throwable) {
             logger.error(throwable.getMessage());
         }
         logger.info("*****************after");
-
+        return proceed;
     }
 }

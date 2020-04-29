@@ -1,10 +1,13 @@
 package com.example.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
  * 借阅信息实例
  */
+@Component
 public class BorrowInfo {
 
 	/**用户编号*/

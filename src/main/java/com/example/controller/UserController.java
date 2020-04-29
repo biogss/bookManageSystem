@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,9 +36,9 @@ public class UserController {
 	}
 
 	@RequestMapping("/getUserInfoByUserName")
-	public ResultVo getUserInfoByUserName(@RequestBody JSONObject userParam) {
-		logger.info(userParam.toJSONString());
-		List<User> userList = userService.getUserInfoByUserName(userParam.getString("userName"));
+	public ResultVo getUserInfoByUserName(@RequestParam("userName") String userName) {
+		logger.info(userName);
+		List<User> userList = userService.getUserInfoByUserName(userName);
 		ResultVo resultVo = new ResultVo();
 		resultVo.setResultData(userList);
 		return resultVo;

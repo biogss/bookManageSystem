@@ -1,5 +1,7 @@
 package com.example.model;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ import java.util.Date;
  * @DATE 2020/4/18 15:34
  * @Version 1.0
  */
+@Component
 public class Book {
 
     /**书籍编号*/

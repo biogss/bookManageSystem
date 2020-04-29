@@ -28,38 +28,13 @@ public class BorrowController {
 	@Autowired
 	private BorrowService borrowService;
 
-	@Autowired
-	private BookService bookService;
-
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping("/borrowBook")
 	@Transactional
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
 		logger.info(params.toJSONString());
-
-		User userInfo = userService.getUserInfoByUserId(params.getInteger("userId"));
-		if (userInfo != null && "1".equals(userInfo.getUserType())) {
-			BorrowInfo borrowInfo = new BorrowInfo();
-			borrowInfo.setBookId(params.getInteger("bookId"));
-			borrowInfo.setUserId(params.getInteger("userId"));
-			borrowInfo.setBorrowStartTime(params.getDate("borrowStartTime"));
-			borrowInfo.setBorrowEndTime(params.getDate("borrowEndTime"));
-			borrowService.addBorrowInfo(borrowInfo);
-
-			Book book = new Book();
-			book.setBookId(params.getInteger("bookId"));
-			book.setBookDepreciation(14);
-			bookService.updateBook(book);
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-//            int a = 2/0;
-		}
+		boolean result = borrowService.borrowBook(params);
 		ResultVo resultVo = new ResultVo();
+		resultVo.setResultData(result);
 		return resultVo;
 	}
 }

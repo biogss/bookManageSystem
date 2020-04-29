@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -31,17 +32,17 @@ public class BookController {
 
     @RequestMapping("/getBookByName")
     @Transactional
-    public ResultVo getBook(@RequestBody JSONObject bookName){
+    public ResultVo getBook(@RequestParam("bookName") String bookName){
         ResultVo resultVo = new ResultVo();
-        logger.info("getBookByName入参为：" + bookName.toString());
-        List<Book> bookList =  bookService.getBookListByBookName(bookName.getString("bookName"));
+        logger.info("getBookByName入参为：" + bookName);
+        List<Book> bookList =  bookService.getBookListByBookName(bookName);
         logger.info("第一次查询结果："  + bookList.get(0).toString());
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<Book> bookList2 =  bookService.getBookListByBookName(bookName.getString("bookName"));
+        List<Book> bookList2 =  bookService.getBookListByBookName(bookName);
         logger.info("第二次查询结果："  + bookList2.get(0).toString());
         resultVo.setResultData(bookList);
         return resultVo;

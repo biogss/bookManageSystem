@@ -1,31 +1,20 @@
 package com.example.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.model.Book;
 import com.example.model.BorrowInfo;
+import com.example.model.User;
 
 /**
  * 借阅周期接口
  * @author wanghao
  */
 public interface BorrowService {
-	/**
-	 * 新增借阅周期
-	 * @param borrowInfo 借阅周期信息
-	 * @return int
-	 */
-	int addBorrowInfo(BorrowInfo borrowInfo);
 
 	/**
-	 * 更新借阅信息
-	 * @param borrowInfo 借阅信息
-	 * @return int
+	 * 借阅shuj
+	 * @param params 参数列表
+	 * @return 借阅的数据信息
 	 */
-	int updateBorrowInfo(BorrowInfo borrowInfo);
-
-	/**
-	 * 根据用户id和书籍id查询定于信息
-	 * @param userId 用户编号
-	 * @param bookId 书籍编号
-	 * @return BorrowInfo
-	 */
-	BorrowInfo getBorrowInfoByUserIdAndBookId(String userId, String bookId);
+	boolean borrowBook(JSONObject params);
 }

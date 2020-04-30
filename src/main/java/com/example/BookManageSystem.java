@@ -1,7 +1,10 @@
 package com.example;
 
+import com.example.config.SystemConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * @ClassName BookManageSystem
@@ -14,5 +17,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BookManageSystem {
     public static void main(String[] args) {
         SpringApplication.run(BookManageSystem.class, args);
-}
+    }
 }

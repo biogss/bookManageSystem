@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
+
 @Service
 public class BorrowServiceImpl implements BorrowService {
 
@@ -33,7 +35,7 @@ public class BorrowServiceImpl implements BorrowService {
 
 
     @Override
-    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional(rollbackFor = SQLException.class)
     public boolean borrowBook(User user, Book bookInfo, BorrowInfo borrowInfo) {
         boolean result = false;
         User userInfo = userDao.getUserInfoByUserId(user.getUserId());

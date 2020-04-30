@@ -1,5 +1,8 @@
 server:
   port: 9090
+system:
+  config:
+    type: 10
 
 spring:
   datasource:
@@ -59,4 +62,5 @@ mybatis:
 logging:
   level:
     com.example.dao: debug
-    root: debug
+    root: info
+

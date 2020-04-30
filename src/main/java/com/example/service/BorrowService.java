@@ -12,9 +12,11 @@ import com.example.model.User;
 public interface BorrowService {
 
 	/**
-	 * 借阅shuj
-	 * @param params 参数列表
-	 * @return 借阅的数据信息
+	 * 借阅书籍
+	 * @param user
+	 * @param book
+	 * @param borrowInfo
+	 * @return boolean
 	 */
 	boolean borrowBook(User user, Book book, BorrowInfo borrowInfo);
 }

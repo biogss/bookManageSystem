@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 /**
  * @ClassName controllerAOP
  * @Description aop测试类
@@ -40,16 +42,22 @@ public class controllerAOP {
         Signature signature = joinPoint.getSignature();
         logger.info("controller方法："  + signature.getDeclaringTypeName() + "." +signature.getName() + "执行完成");
     }
-    @Around("controllerLog()")
-    public Object logAround(ProceedingJoinPoint point){
-        logger.info("******************before");
-        Object proceed = null;
-        try {
-            proceed = point.proceed();
-        } catch (Throwable throwable) {
-            logger.error(throwable.getMessage());
-        }
-        logger.info("*****************after");
-        return proceed;
+//    @Around("controllerLog()")
+//    public Object logAround(ProceedingJoinPoint point){
+//        logger.info("******************before");
+//        Object proceed = null;
+//        try {
+//            proceed = point.proceed();
+//        } catch (Throwable throwable) {
+//            logger.error(throwable.getMessage());
+//        }
+//        logger.info("*****************after");
+//        return proceed;
+//    }
+
+
+    @AfterThrowing(pointcut = "controllerLog()", throwing = "ex")
+    public void logAfterException(RuntimeException ex) {
+        logger.error("异常了！" + ex.getMessage());
     }
 }

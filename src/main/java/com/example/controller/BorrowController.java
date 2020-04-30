@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.config.SystemConfig;
 import com.example.model.Book;
 import com.example.model.BorrowInfo;
 import com.example.model.User;
@@ -12,6 +13,7 @@ import com.example.util.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,12 @@ public class BorrowController {
 	@Autowired
 	private BorrowService borrowService;
 
+	@Autowired
+	private SystemConfig systemConfig;
+
 	@RequestMapping("/borrowBook")
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
+        logger.error("系统参数type***********" + systemConfig.getType());
 		User user = new User();
 		user.setUserId(params.getInteger("userId"));
 		Book bookInfo = new Book();

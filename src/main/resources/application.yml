@@ -1,8 +1,10 @@
 server:
   port: 9090
 system:
+  name: wanghao
   config:
     type: 10
+    name: xiaohao
 
 spring:
   datasource:

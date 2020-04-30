@@ -3,6 +3,7 @@ package com.example.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.config.SystemConfig;
+import com.example.config.ValueConfig;
 import com.example.model.Book;
 import com.example.model.BorrowInfo;
 import com.example.model.User;
@@ -33,9 +34,13 @@ public class BorrowController {
 	@Autowired
 	private SystemConfig systemConfig;
 
+	@Autowired
+	private ValueConfig valueConfig;
+
 	@RequestMapping("/borrowBook")
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
         logger.error("系统参数type***********" + systemConfig.getType());
+        logger.error("系统参数name***********" + valueConfig.getName());
 		User user = new User();
 		user.setUserId(params.getInteger("userId"));
 		Book bookInfo = new Book();

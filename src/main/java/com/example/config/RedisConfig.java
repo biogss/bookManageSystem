@@ -6,7 +6,10 @@ import org.slf4j.helpers.SubstituteLogger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.jedis.JedisConnection;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @ClassName RedisConfig
@@ -26,6 +29,9 @@ public class RedisConfig {
     /**redis服务器地址*/
     private String host;
 
+    /**密码*/
+    private String password;
+
     public int getPort() {
         return port;
     }
@@ -42,10 +48,12 @@ public class RedisConfig {
         this.host = host;
     }
 
-    @Bean
-    public Jedis getJedis() {
-        logger.info("*****************host:" + this.host + ",port:" + this.port);
-        Jedis jedis = new Jedis(host, port);
-        return jedis;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

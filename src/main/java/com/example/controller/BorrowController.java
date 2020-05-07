@@ -38,14 +38,10 @@ public class BorrowController {
 	@Autowired
 	private ValueConfig valueConfig;
 
-	@Autowired
-    Jedis jedis;
-
 	@RequestMapping("/borrowBook")
 	public ResultVo borrowBook(@RequestBody JSONObject params) {
 //        logger.error("系统参数type***********" + systemConfig.getType());
 //        logger.error("系统参数name***********" + valueConfig.getName());
-        logger.error("*********jedis结果为：" + jedis.get("hello"));
 		User user = new User();
 		user.setUserId(params.getInteger("userId"));
 		Book bookInfo = new Book();

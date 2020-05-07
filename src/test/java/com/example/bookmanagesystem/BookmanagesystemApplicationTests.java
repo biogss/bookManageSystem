@@ -1,5 +1,6 @@
 package com.example.bookmanagesystem;
 
+import com.example.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,16 @@ class BookmanagesystemApplicationTests {
     private final Logger logger = LoggerFactory.getLogger(BookmanagesystemApplicationTests.class);
 
     @Autowired
-    Jedis jedis;
+    RedisUtil redisUtil;
+
     @Test
     void contextLoads() {
-        jedis.set("app","124");
-        logger.error(jedis.get("hello"));
-        logger.error(jedis.get("app"));
+        for (int i = 0; i < 100; i++) {
+            Jedis jedis = redisUtil.getJedis();
+            logger.error(jedis.set("app",jedis.toString()));
+            logger.error(jedis.get("app"));
+            jedis.close();
+        }
     }
 
 }

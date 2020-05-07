@@ -13,6 +13,7 @@ public class RedisUtil {
 	private RedisConfig redisConfig;
 
 	private JedisPool jedisPool = null;
+	/**必须使用构造函数注入，如果变量注入会报异常，因为执行顺序是构造函数>@Autowired */
 	@Autowired
 	public RedisUtil (RedisConfig redisConfig) {
 		this.redisConfig = redisConfig;

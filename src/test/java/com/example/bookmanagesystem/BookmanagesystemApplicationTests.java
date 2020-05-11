@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Transaction;
 import redis.clients.util.Slowlog;
 
 import java.util.List;
@@ -110,8 +111,13 @@ class BookmanagesystemApplicationTests {
 //        });
 
         //OTHER
-        Jedis jedis = redisUtil.getJedis();
-        jedis.multi();
+//        Jedis jedis = redisUtil.getJedis();
+//        Transaction
+//        Transaction transaction = jedis.multi();
+//        for (int i = 0; i< 10; i++) {
+//            jedis.set(String.valueOf(i), i + "a");
+//        }
+//        transaction.exec();
 //        jedis.rename("mySet", "mySetNew");
 //        List<String> configList = jedis.configGet("*");
 //        configList.stream().forEach((param) -> {
@@ -122,6 +128,15 @@ class BookmanagesystemApplicationTests {
 //        slowlogs.stream().forEach((param) -> {
 //            param.toString();
 //        });
+
+//        pipeline
+//        Jedis jedis = redisUtil.getJedis();
+//        Pipeline pipeline = jedis.pipelined();
+//        for (int i = 0; i < 1000; i++) {
+//            pipeline.set(String.valueOf(i), "pipeline" + i);
+//        }
+//        pipeline.sync(); //执行命令不返回结果
+//        pipeline.syncAndReturnAll();//执行命令，并按顺序返回命令的执行结果
 
     }
 

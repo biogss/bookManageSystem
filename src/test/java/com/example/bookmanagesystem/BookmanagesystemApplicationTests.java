@@ -1,5 +1,7 @@
 package com.example.bookmanagesystem;
 
+import com.example.util.AnnotationTest;
+import com.example.util.MySerializer;
 import com.example.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -22,6 +24,11 @@ class BookmanagesystemApplicationTests {
 
     @Test
     void contextLoads() {
+        try {
+            System.out.println(MySerializer.serialize(new AnnotationTest()));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 //        不释放链接会因为链接不够报错
 //        for (int i = 0; i < 100; i++) {
 //            Jedis jedis = redisUtil.getJedis();

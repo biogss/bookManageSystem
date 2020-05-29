@@ -3,12 +3,16 @@ package com.example.bookmanagesystem;
 import com.example.util.AnnotationTest;
 import com.example.util.MySerializer;
 import com.example.util.RedisUtil;
+import org.apache.ibatis.annotations.Param;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Transaction;
+import redis.clients.util.Slowlog;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +42,7 @@ class BookmanagesystemApplicationTests {
 //        }
 
 //        STRING
-//        Jedis jedis = redisUtil.getJedis();
+//
 //        logger.info(jedis.set("hello","redis"));
 //        logger.info(String.valueOf(jedis.exists("hello")));
 //        logger.info(jedis.get("hello"));
@@ -58,7 +62,7 @@ class BookmanagesystemApplicationTests {
 //        jedis.set("exp", "timeout", "nx", "ex", 1000);
 //        logger.info(String.valueOf(jedis.strlen("exp")));
 //        HASH
-        Jedis jedis = redisUtil.getJedis();
+//        Jedis jedis = redisUtil.getJedis();
 //        logger.info(String.valueOf(jedis.hset("personHash","name", "wanghao")));
 //        jedis.hset("personHash", "age", "12");
 //        List<String> hmget = jedis.hmget("personHash", "name", "age", "sex");
@@ -81,8 +85,65 @@ class BookmanagesystemApplicationTests {
 //            logger.info(entry.getValue());
 //        });
 
+//        LIST
+//        Jedis jedis = redisUtil.getJedis();
+//        logger.info(String.valueOf(jedis.lpush("leftList",
+//                "c", "java", "python", "c#", "php", "plsql")));
+//        logger.info(jedis.lpop("leftList"));
+//        logger.info(String.valueOf(jedis.llen("leftList")));
+//        logger.info(jedis.lindex("leftList", 0));
+//        List<String> leftList = jedis.lrange("leftList", 0, -1);
+//        leftList.stream().forEach((str) -> {
+//            logger.info("遍历" + str);
+//        });
 
+//        jedis.expire("leftList", 1000);
+//        logger.info(String.valueOf(jedis.ttl("leftList")));
+//        logger.info(String.valueOf(jedis.lrem("leftList", 2, "java")));
+//        logger.info(jedis.lset("leftList", 0, "php2"));
 
+//        SET
+//        Jedis jedis = redisUtil.getJedis();
+//        jedis.sadd("mySet", "apple", "pear", "blueberry", "peach", "strawberry");
+//        logger.info(String.valueOf(jedis.sismember("mySet", "apple")));
+//        logger.info(String.valueOf(jedis.scard("mySet")));
+//        Set<String> mySet = jedis.smembers("mySet");
+//        mySet.stream().forEach((str) -> {
+//            logger.info("遍历：" + str);
+//        });
+//        logger.info(jedis.spop("mySet"));
+//        List<String> stringSet = jedis.srandmember("mySet", 5);
+//        stringSet.stream().forEach( (param) -> {
+//            logger.info(param);
+//        });
+
+        //OTHER
+//        Jedis jedis = redisUtil.getJedis();
+//        Transaction
+//        Transaction transaction = jedis.multi();
+//        for (int i = 0; i< 10; i++) {
+//            jedis.set(String.valueOf(i), i + "a");
+//        }
+//        transaction.exec();
+//        jedis.rename("mySet", "mySetNew");
+//        List<String> configList = jedis.configGet("*");
+//        configList.stream().forEach((param) -> {
+//            logger.info(param);
+//        });
+//        jedis.configSet("slowlog-log-slower-than", "0");
+//        List<Slowlog> slowlogs = jedis.slowlogGet();
+//        slowlogs.stream().forEach((param) -> {
+//            param.toString();
+//        });
+
+//        pipeline
+//        Jedis jedis = redisUtil.getJedis();
+//        Pipeline pipeline = jedis.pipelined();
+//        for (int i = 0; i < 1000; i++) {
+//            pipeline.set(String.valueOf(i), "pipeline" + i);
+//        }
+//        pipeline.sync(); //执行命令不返回结果
+//        pipeline.syncAndReturnAll();//执行命令，并按顺序返回命令的执行结果
 
     }
 
